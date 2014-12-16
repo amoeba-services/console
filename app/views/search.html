@@ -1,0 +1,13 @@
+<select ng-model="api.namespace"  ng-options="namespace for namespace in namespaces" ng-change="search()">
+  <option value="">不指定</option>
+</select>
+<input type="text" placeholder="/path/to/resource" ng-model="api.path" ng-change="search()"/>
+<ul ng-show="matchedApis.length">
+  <li ng-repeat="api in matchedApis">
+    {{api}}
+    <a ng-href="{{getHref(api)}}">
+      <span class="path">{{api.path}}</span>
+      <span class="namespace">{{api.namespace}}</span>
+    </a>
+  </li>
+</ul>
