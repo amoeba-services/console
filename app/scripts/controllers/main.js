@@ -2,12 +2,11 @@
 
 /**
  * @ngdoc function
- * @name awiApp.controller:MainCtrl
+ * @name ampApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the awiApp
+ * Controller of the ampApp
  */
-angular.module('awiApp')
-  .controller('MainCtrl', function ($scope, Api) {
-
+angular.module('ampApp')
+  .controller('MainCtrl', function ($scope) {
   });

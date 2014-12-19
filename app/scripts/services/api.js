@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name awiApp.api
+ * @name ampApp.api
  * @description
  * # api
- * Factory in the awiApp.
+ * Factory in the ampApp.
  */
-angular.module('awiApp')
+angular.module('ampApp')
   .factory('Api', function ($resource) {
     // Service logic
 

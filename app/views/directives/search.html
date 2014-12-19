@@ -1,0 +1,38 @@
+<div class="search" mode="{{active ? 'active' : ''}}">
+  <div class="search-bar">
+    <md-button ng-show="active" ng-click="deactivate()">Back</md-button>
+    <select ng-model="api.namespace"
+            ng-options="namespace for namespace in namespaces"
+            ng-change="activate();search()"
+            ng-click="">
+      <option value="">不指定</option>
+    </select>
+    <input type="text"
+           placeholder="/path/to/resource"
+           class="input-path"
+           ng-model="api.path"
+           ng-change="search()"
+           ng-click="activate()"
+           ng-keydown="checkKeyDown($event)"/>
+  </div>
+  <ul ng-show="active && matchedApis.length">
+    <li ng-repeat="api in matchedApis"
+        active="{{$index === activeIndex}}"
+        ng-switch on="api.mode"
+        class="result-item">
+      <div class="result-item-content" ng-switch-when="disabled">
+        <span class="label label-notice">!</span>
+        指定 namespace 以新增 API
+      </div>
+      <a ng-href="#{{getHref(api)}}"
+         class="result-item-content"
+         ng-mouseenter="activateResultItem($index)"
+         ng-switch-default>
+        <span class="label label-add" ng-show="api.mode === 'add'">+</span>
+        <span class="namespace">{{api.namespace}}</span>
+        <span class="path">{{api.path}}</span>
+      </a>
+    </li>
+  </ul>
+  <div class="mask" ng-show="active" ng-click="deactivate()"></div>
+</div>

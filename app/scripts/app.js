@@ -2,19 +2,20 @@
 
 /**
  * @ngdoc overview
- * @name awiApp
+ * @name ampApp
  * @description
- * # awiApp
+ * # ampApp
  *
  * Main module of the application.
  */
 angular
-  .module('awiApp', [
+  .module('ampApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    'ngMaterial'
   ])
   .config(function ($routeProvider) {
     $routeProvider

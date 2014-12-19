@@ -3,7 +3,7 @@
 describe('Controller: ApiCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('awiApp'));
+  beforeEach(module('ampApp'));
 
   var ApiCtrl,
     scope;

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name awiApp.controller:ApiCtrl
+ * @name ampApp.controller:ApiCtrl
  * @description
  * # ApiCtrl
- * Controller of the awiApp
+ * Controller of the ampApp
  */
-angular.module('awiApp')
+angular.module('ampApp')
   .controller('ApiCtrl', function ($routeParams, $scope, Api) {
     $scope.api = $routeParams;
     $scope.api.path = decodeURIComponent($scope.api.path);
