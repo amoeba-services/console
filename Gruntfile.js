@@ -18,7 +18,10 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'dist',
+    //TODO: need to find a way to load bowerrc.
+    //bower: require('./.bowerrc').directory || 'bower_components'
+    bower: 'bower_components'
   };
 
   // Define the configuration for all the tasks
@@ -231,6 +234,17 @@ module.exports = function (grunt) {
         }
       }
     },
+    concat: {
+      options: {
+        // there's no easy way to set the separator differently between JS and CSS
+        process: function (src, filepath) {
+          if (filepath.split(/\./).pop === 'js') {
+            return src + ';';
+          }
+          return src;
+        }
+      }
+    },
 
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
@@ -282,9 +296,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= yeoman.app %>',
           src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
+          dest: '<%= yeoman.dist %>'
         }]
       }
     },
@@ -338,6 +352,8 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
+            'Procfile',
+            'composer.json',
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
@@ -355,6 +371,12 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      bowerAssets: {
+        expand: true,
+        cwd: '<%= yeoman.bower %>/material-design-icons',
+        dest: '<%= yeoman.dist %>/<%= yeoman.bower %>/material-design-icons',
+        src: '{,**/}*.svg'
       }
     },
 
@@ -414,6 +436,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'copy:bowerAssets',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

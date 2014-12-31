@@ -1,35 +1,47 @@
 <div class="search" mode="{{active ? 'active' : ''}}">
-  <div class="search-bar">
-    <md-button ng-show="active" ng-click="deactivate()">Back</md-button>
-    <select ng-model="api.namespace"
-            ng-options="namespace for namespace in namespaces"
-            ng-change="activate();search()"
-            ng-click="">
-      <option value="">不指定</option>
-    </select>
-    <input type="text"
-           placeholder="/path/to/resource"
-           class="input-path"
-           ng-model="api.path"
-           ng-change="search()"
-           ng-click="activate()"
-           ng-keydown="checkKeyDown($event)"/>
+  <div class="search-bar md-whiteframe-z1">
+    <div class="invisible-fence" layout="row" layout-align="start center">
+      <md-button ng-hide="active" class="btn-home" aria-label="Home">
+        <md-icon icon="/bower_components/material-design-icons/action/svg/production/ic_home_24px.svg"></md-icon>
+      </md-button>
+      <md-button ng-show="active" ng-click="deactivate()" aria-label="Back to API">
+        <md-icon icon="/bower_components/material-design-icons/navigation/svg/production/ic_arrow_back_24px.svg"></md-icon>
+      </md-button>
+      <select ng-model="api.namespace"
+              ng-options="namespace for namespace in namespaces"
+              ng-change="activate();search()"
+              ng-click="">
+        <option value="">不指定</option>
+      </select>
+      <input type="text"
+             placeholder="/path/to/resource"
+             class="input-path"
+             flex
+             ng-model="api.path"
+             ng-change="search()"
+             ng-click="activate()"
+             ng-keydown="checkKeyDown($event)"/>
+      <loading class="loading">
+      </loading>
+    </div>
   </div>
   <ul ng-show="active && matchedApis.length">
     <li ng-repeat="api in matchedApis"
         active="{{$index === activeIndex}}"
         ng-switch on="api.mode"
         class="result-item">
-      <div class="result-item-content" ng-switch-when="disabled">
-        <span class="label label-notice">!</span>
-        指定 namespace 以新增 API
+      <div class="result-item-content invisible-fence" ng-switch-when="disabled">
+        <object class="result-item-icon" data="/bower_components/material-design-icons/alert/svg/production/ic_error_24px.svg">
+        </object>指定 namespace 以新增 API
       </div>
       <a ng-href="#{{getHref(api)}}"
-         class="result-item-content"
+         class="result-item-content invisible-fence"
          ng-mouseenter="activateResultItem($index)"
          ng-switch-default>
-        <span class="label label-add" ng-show="api.mode === 'add'">+</span>
-        <span class="namespace">{{api.namespace}}</span>
+        <object class="result-item-icon"
+                ng-show="api.mode === 'add'"
+                data="/bower_components/material-design-icons/content/svg/production/ic_add_24px.svg">
+        </object><span class="namespace">{{api.namespace}}</span>
         <span class="path">{{api.path}}</span>
       </a>
     </li>

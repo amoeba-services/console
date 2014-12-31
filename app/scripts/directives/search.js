@@ -7,7 +7,7 @@
  * # search
  */
 angular.module('ampApp')
-  .directive('search', ['$http', '$location', function ($http, $location) {
+  .directive('search', ['$http', '$location', 'Api', function ($http, $location, Api) {
     var SUGGEST_MAX_AMOUNT = 5;
 
     return {
@@ -43,7 +43,7 @@ angular.module('ampApp')
         };
 
         scope.initApi();
-        scope.namespaces = ['playground', 'pc'];
+        scope.namespaces = ['playground', 'pc', 'mis'];
         scope.search = function() {
           if (timeout) {
             clearTimeout(timeout);
@@ -54,12 +54,14 @@ angular.module('ampApp')
           }
           var api = _.extend({}, scope.api);
           timeout = setTimeout(function () {
-            var query = encodeURIComponent(api.path);
+            var query = api.path;
             if (scope.api.namespace !== null) {
-              query += '+namespace:' + api.namespace;
+              query += ' namespace:' + api.namespace;
             }
-            var url = '//amoeba-api.herokuapp.com/apis?q=' + query + '&amount=' + SUGGEST_MAX_AMOUNT;
-            $http.get(url).success(function (data) {
+            Api.query({
+              q: query,
+              limit: SUGGEST_MAX_AMOUNT
+            }, function(data) {
               if (api.namespace === null) {
                 api.mode = 'disabled';
                 data.push(api);
@@ -75,7 +77,7 @@ angular.module('ampApp')
                 }
               }
               scope.matchedApis = data;
-              scope.activeIndex = -1;
+              scope.activeIndex = 0;
             });
           }, 400);
         };

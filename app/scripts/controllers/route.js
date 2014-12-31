@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc function
- * @name ampApp.controller:MainCtrl
+ * @name ampApp.controller:RouteCtrl
  * @description
- * # MainCtrl
+ * # RouteCtrl
  * Controller of the ampApp
  */
 angular.module('ampApp')
-  .controller('MainCtrl', function () {
+  .controller('RouteCtrl', function () {
   });

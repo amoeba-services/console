@@ -12,5 +12,7 @@ angular.module('ampApp')
     // Service logic
 
     // Public API here
-    return $resource('//amoeba-api.herokuapp.com/apis/:namespace/:path');
+    return $resource('//amoeba-api.herokuapp.com/apis/:namespace/:path', {}, {
+      'save': {method:'PUT'}
+    });
   });
