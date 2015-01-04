@@ -54,14 +54,14 @@ angular
 
         numLoadings++;
 
-        $rootScope.$broadcast("loading_show");
-        return config || $q.when(config)
+        $rootScope.$broadcast('loading_show');
+        return config || $q.when(config);
 
       },
       response: function (response) {
 
         if ((--numLoadings) === 0) {
-          $rootScope.$broadcast("loading_hide");
+          $rootScope.$broadcast('loading_hide');
         }
 
         return response || $q.when(response);
@@ -70,7 +70,7 @@ angular
       responseError: function (response) {
 
         if (!(--numLoadings)) {
-          $rootScope.$broadcast("loading_hide");
+          $rootScope.$broadcast('loading_hide');
         }
 
         return $q.reject(response);

@@ -109,7 +109,7 @@ angular.module('ampApp')
             content.type = 'json';
           }
           if (content.type === 'json') {
-            content.body = JSONFormat(JSON.stringify(content.body));
+            content.body = JSONFormat(content.body);
           }
           $scope.editorOptions.mode = $scope.modes[content.type];
         }
@@ -138,7 +138,7 @@ angular.module('ampApp')
           content.type = 'json';
         }
         if (content.type === 'json') {
-          content.body = JSONFormat(JSON.stringify(content.body));
+          content.body = JSONFormat(content.body);
         }
         if (typeof content.status === 'undefined') {
           content.status = '200';
@@ -212,7 +212,7 @@ angular.module('ampApp')
         }).value();
       }
       if (content.type === 'json'){
-        content.body = JSON.parse(content.body);
+        content.body = JSON.stringify(JSON.parse(content.body));
       }
       return item;
     }

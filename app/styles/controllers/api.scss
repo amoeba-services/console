@@ -97,4 +97,34 @@
     filter: grayscale(50%);
   }
 
+
+  .error-info {
+    position: relative;
+    > .error-info-item {
+      margin: 12px 0;
+      &.md-button {
+        min-width: 8em;
+        font-size: 1.2em;
+      }
+    }
+  }
+}
+
+.create-api-dialog {
+  width: 50%;
+  .namespace {
+    margin-right: 10px;
+  }
+  md-input-group {
+    margin-top: 0;
+    > input {
+      width: 100%;
+    }
+  }
+
+  .md-actions {
+    .md-button {
+      min-width: 4em;
+    }
+  }
 }

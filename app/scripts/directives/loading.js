@@ -13,10 +13,10 @@ angular.module('ampApp')
       restrict: 'E',
       link: function ($scope) {
         $scope.show = true;
-        $scope.$on("loading_show", function () {
+        $scope.$on('loading_show', function () {
           $scope.show = true;
         });
-        $scope.$on("loading_hide", function () {
+        $scope.$on('loading_hide', function () {
           $scope.show = false;
         });
       }

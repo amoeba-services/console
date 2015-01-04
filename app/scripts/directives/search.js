@@ -16,7 +16,8 @@ angular.module('ampApp')
       replace: true,
       scope: {
         initPath: '@path',
-        initNamespace: '@namespace'
+        initNamespace: '@namespace',
+        namespaces: '='
       },
       link: function postLink(scope) {
         var timeout;
@@ -43,7 +44,7 @@ angular.module('ampApp')
         };
 
         scope.initApi();
-        scope.namespaces = ['playground', 'pc', 'mis'];
+
         scope.search = function() {
           if (timeout) {
             clearTimeout(timeout);

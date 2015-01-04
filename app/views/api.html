@@ -1,8 +1,8 @@
 <div layout="column" id="view-api" >
-  <search path="{{api.path}}" namespace="{{api.namespace}}"></search>
-  <div layout="column" flex class="api-info" >
+  <search path="{{api.path}}" namespace="{{api.namespace}}" namespaces="namespaces"></search>
+  <div layout="column" flex class="api-info" ng-if="!error && api.route">
   <md-toolbar ng-class="{'disabled': api.disabled, 'md-hue-1': !api.disabled}" class="api-desc" >
-    <div class="md-toolbar-tools invisible-fence" style="position: relative;">
+    <form class="md-toolbar-tools invisible-fence" name="apiDescForm" style="position: relative;">
       <!--TODO: Waiting for https://github.com/angular/material/issues/547 to be fixed-->
       <!--<md-text-float-->
         <!--ng-model="description"-->
@@ -11,7 +11,7 @@
         <!--label="API Description"></md-text-float>-->
       <md-input-group class="md-default-theme" flex>
         <label>API Description</label>
-        <md-input ng-model="description" ng-blur="updateDescription()"></md-input>
+        <md-input ng-model="api.description" ng-focus="cacheDescription()" ng-blur="updateDescription(apiDescForm)" name="description" required="true"></md-input>
       </md-input-group>
       <div>
         <md-switch ng-model="api.disabled" class="md-warn" aria-label="Disabled" ng-change="saveApi()"></md-switch>
@@ -19,7 +19,7 @@
           Disable
         </md-tooltip>
       </div>
-    </div>
+    </form>
   </md-toolbar>
   <div layout="row" flex ng-class="{disabled: api.disabled}">
     <section ng-controller="RouteCtrl" class="route">
@@ -60,7 +60,7 @@
             {{routeItem.response.content.status + ' ' + HTTP_STATUS_CODE[routeItem.response.content.status]}}
           </div>
           <div class="info-content-group">
-            <ui-codemirror ui-codemirror-opts="editorOptions" ng-model="routeItem.response.content.body"></ui-codemirror>
+            <ui-codemirror  ui-codemirror-opts="editorOptions" ng-model="routeItem.response.content.body"></ui-codemirror>
             <span class="info-content-type">{{routeItem.response.content.type}}</span>
           </div>
           <div class="info-content-group" ng-show="routeItem.response.content.headers">
@@ -98,7 +98,7 @@
           </div>
 
           <div class="info-content-group">
-            <div ng-show="error.JSON_INVALID" class="md-warn">
+            <div ng-show="error.JSON_INVALID" class="input-error-hint">
               <!--<object data="/bower_components/material-design-icons/alert/svg/production/ic_error_18px.svg"></object>-->
               Invalid JSON
             </div>
@@ -129,5 +129,12 @@
 
   </div>
 
+  </div>
+  <!--错误信息-->
+  <div layout="column" layout-align="center center"
+       flex class="error-info" ng-if="error">
+    <object class="error-info-item" data="/bower_components/material-design-icons/alert/svg/production/ic_error_48px.svg"></object>
+    {{error.message}}
+    <md-button class="error-info-item md-primary" ng-show="error.status===404" ng-click="showCreateApiDialog($event)">Create It</md-button>
   </div>
 </div>

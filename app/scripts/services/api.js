@@ -13,6 +13,7 @@ angular.module('ampApp')
 
     // Public API here
     return $resource('//amoeba-api.herokuapp.com/apis/:namespace/:path', {}, {
+      'create': {method: 'POST'},
       'save': {method:'PUT'}
     });
   });
