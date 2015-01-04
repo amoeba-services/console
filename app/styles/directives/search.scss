@@ -34,7 +34,7 @@
     .loading {
       $progress-circular-size : 50px;
       position: absolute;
-      right: 18px;
+      right: 12px;
       top: 50%;
       margin-top: - $progress-circular-size / 2;
       transform: scale(20px / $progress-circular-size);
