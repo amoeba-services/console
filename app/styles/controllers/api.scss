@@ -31,6 +31,12 @@
         margin: 0 8px 0 0;
       }
     }
+    .mockjs-hint {
+      text-align: right;
+      border-bottom: 1px solid #eee;
+      font-size: .8em;
+      color: #AAA;
+    }
   }
 
   .api-desc{
@@ -80,17 +86,25 @@
     line-height: 1.5;
     position: relative;
 
-    .CodeMirror {
-      margin: 0 -1em;
+    &.code {
+      padding: 0;
     }
   }
 
-
-  .button-edit {
-    position: absolute;
-    bottom: 16px;
-    right: 12px;
-    z-index: 5;
+  .fab-button-container {
+    .fab-button-container-inner {
+      width: 100%;
+      max-width: 720px + 78px * 2;
+      height: 0;
+      margin: 0 auto;
+      position: relative;
+      z-index: 5;
+    }
+    .button-edit {
+      position: absolute;
+      bottom: 16px;
+      right: 12px;
+    }
   }
 
   .disabled {

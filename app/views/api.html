@@ -1,28 +1,27 @@
 <div layout="column" id="view-api" >
   <search path="{{api.path}}" namespace="{{api.namespace}}" namespaces="namespaces"></search>
   <div layout="column" flex class="api-info" ng-if="!error && api.route">
-  <md-toolbar ng-class="{'disabled': api.disabled, 'md-hue-1': !api.disabled}" class="api-desc" >
-    <form class="md-toolbar-tools invisible-fence" name="apiDescForm" style="position: relative;">
-      <!--TODO: Waiting for https://github.com/angular/material/issues/547 to be fixed-->
-      <!--<md-text-float-->
-        <!--ng-model="description"-->
-        <!--ng-blur="updateDescription()"-->
-        <!--flex-->
-        <!--label="API Description"></md-text-float>-->
-      <md-input-group class="md-default-theme" flex>
-        <label>API Description</label>
-        <md-input ng-model="api.description" ng-focus="cacheDescription()" ng-blur="updateDescription(apiDescForm)" name="description" required="true"></md-input>
-      </md-input-group>
-      <div>
-        <md-switch ng-model="api.disabled" class="md-warn" aria-label="Disabled" ng-change="saveApi()"></md-switch>
-        <md-tooltip>
-          Disable
-        </md-tooltip>
-      </div>
-    </form>
-  </md-toolbar>
-  <div layout="row" flex ng-class="{disabled: api.disabled}">
-    <section ng-controller="RouteCtrl" class="route">
+    <md-toolbar ng-class="{'disabled': api.disabled, 'md-hue-1': !api.disabled}" class="api-desc" >
+      <form class="md-toolbar-tools invisible-fence" name="apiDescForm" style="position: relative;">
+        <!--TODO: Waiting for https://github.com/angular/material/issues/547 to be fixed-->
+        <!--<md-text-float-->
+          <!--ng-model="description"-->
+          <!--ng-blur="updateDescription()"-->
+          <!--flex-->
+          <!--label="API Description"></md-text-float>-->
+        <md-input-group class="md-default-theme" flex>
+          <label>API Description</label>
+          <md-input ng-model="api.description" ng-focus="cacheDescription()" ng-blur="updateDescription(apiDescForm)" name="description" required="true"></md-input>
+        </md-input-group>
+        <div>
+          <md-switch ng-model="api.disabled" class="md-warn" aria-label="Disabled" ng-change="saveApi()"></md-switch>
+          <md-tooltip>
+            Disable
+          </md-tooltip>
+        </div>
+      </form>
+    </md-toolbar>
+    <section ng-controller="RouteCtrl" class="route" ng-if="false">
       route
       <script type="text/ng-template" id="nodes_renderer.html">
         <div class="tree-node">
@@ -48,22 +47,19 @@
         </ol>
       </div>
     </section>
-    <section ng-controller="RouteitemCtrl" flex layout="column" >
-      <div style="position: relative;" flex layout="column" class="invisible-fence">
-        <md-button ng-click="edit()" ng-disabled="api.disabled" aria-label="Edit Route item" class="button-edit md-fab">
-          <md-icon icon="/bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
-        </md-button>
+    <section ng-controller="RouteitemCtrl" flex style="overflow: auto;">
+      <div flex layout="column" class="invisible-fence">
         <md-content ng-controller="RouteitemInfoCtrl" class="route-item-content" flex>
           <input type="text" placeholder="Route item description" ng-model="item.description" flex ng-show="false"/>
           <div class="info-content-group">
             <span class="info-key">Status:</span>
             {{routeItem.response.content.status + ' ' + HTTP_STATUS_CODE[routeItem.response.content.status]}}
           </div>
-          <div class="info-content-group">
+          <div class="info-content-group code">
             <ui-codemirror  ui-codemirror-opts="editorOptions" ng-model="routeItem.response.content.body"></ui-codemirror>
             <span class="info-content-type">{{routeItem.response.content.type}}</span>
           </div>
-          <div class="info-content-group" ng-show="routeItem.response.content.headers">
+          <div class="info-content-group" ng-show="routeItem.response.content.headers.length">
             <span class="info-key">Headers:</span>
             <div ng-repeat="header in routeItem.response.content.headers">
               <span class="info-list-item-key">{{header.key}}:</span>{{header.value}}
@@ -72,7 +68,7 @@
         </md-content>
       </div>
       <div ng-controller="RouteitemEditCtrl"
-           ng-show="editMode"
+           ng-show="editMode==='routeitem'"
            ng-animate="'animate'"
            class="md-whiteframe-z2 edit-panel"
            layout="column">
@@ -97,12 +93,15 @@
             </md-checkbox>
           </div>
 
-          <div class="info-content-group">
+          <div class="info-content-group code">
             <div ng-show="error.JSON_INVALID" class="input-error-hint">
               <!--<object data="/bower_components/material-design-icons/alert/svg/production/ic_error_18px.svg"></object>-->
-              Invalid JSON
+              Invalid JSON <a href="http://pro.jsonlint.com/" target="_blank">(?)</a>
             </div>
             <ui-codemirror ui-codemirror-opts="editorOptions" ng-model="item.response.content.body"></ui-codemirror>
+            <div ng-show="item.response.content.type==='json'" class="mockjs-hint">
+              支持 <a href="javascript:;" ng-click="showMockjsDoc($event)">Mockjs 语法</a>
+            </div>
           </div>
           <!--<md-button ng-hide="showAdvancedContent" ng-click="showAdvancedContent=true">Show Advanced Content</md-button>-->
           <!--<div ng-show="showAdvancedContent">-->
@@ -127,7 +126,13 @@
            layout-fill></div>
     </section>
 
-  </div>
+    <div class="fab-button-container">
+      <div class="fab-button-container-inner invisible-fence">
+        <md-button ng-click="setEditMode('routeitem')" ng-disabled="api.disabled" aria-label="Edit Route item" class="button-edit md-fab">
+          <md-icon icon="/bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
+        </md-button>
+      </div>
+    </div>
 
   </div>
   <!--错误信息-->

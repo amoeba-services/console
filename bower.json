@@ -14,7 +14,8 @@
     "angular-ui-tree": "~2.1.5",
     "angular-material": "v0.7.0-rc1",
     "json-format": "phoboslab/json-format",
-    "material-design-icons": "~1.0.1"
+    "material-design-icons": "~1.0.1",
+    "github-markdown-css": "~2.0.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.3.0",

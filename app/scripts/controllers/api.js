@@ -32,6 +32,11 @@ angular.module('ampApp')
 
     $scope.namespaces = ['playground', 'pc', 'mis'];
 
+    $scope.editMode = false;
+    $scope.setEditMode = function(mode) {
+      $scope.editMode = mode;
+    };
+
     $scope.saveApi = function(callback){
       if (typeof $scope.api !== 'undefined') {
         $scope.api.$save({
@@ -52,10 +57,6 @@ angular.module('ampApp')
       else {
         console.error('Save api failed: no api found.');
       }
-    };
-
-    $scope.createApi = function() {
-
     };
 
     $scope.showCreateApiDialog = function (event) {

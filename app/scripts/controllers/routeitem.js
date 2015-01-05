@@ -84,11 +84,6 @@ angular.module('ampApp')
       'xml': 'xml'
     };
 
-    $scope.editMode = false;
-    $scope.edit = function() {
-      $scope.editMode = true;
-    };
-
   })
   .controller('RouteitemInfoCtrl', function($scope) {
     $scope.$watch(
@@ -124,7 +119,7 @@ angular.module('ampApp')
       gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
     };
   })
-  .controller('RouteitemEditCtrl', function($scope, $timeout) {
+  .controller('RouteitemEditCtrl', function($scope, $timeout, $mdDialog) {
     var defaultHeader = {
       key: '',
       value: ''
@@ -150,7 +145,7 @@ angular.module('ampApp')
     }
 
     $scope.cancel = function() {
-      $scope.$parent.editMode = false;
+      $scope.setEditMode(false);
       // timeout 解决动画卡顿问题
       $timeout(function(){
         setScopedItem($scope.api.route[0]);
@@ -222,5 +217,17 @@ angular.module('ampApp')
         $scope.api.route[0] = standardize($scope.item);
         $scope.saveApi($scope.cancel);
       }
+    };
+
+    $scope.showMockjsDoc = function($event) {
+      $mdDialog.show({
+        targetEvent: $event,
+        templateUrl: '/views/mockjsdoc.html',
+        controller: function($scope) {
+          $scope.hide = function() {
+            $mdDialog.hide(true);
+          };
+        },
+      });
     };
   });
