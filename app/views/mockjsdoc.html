@@ -1,59 +1,70 @@
 <md-dialog aria-label="Mango (Fruit)">
   <md-content>
     <div class="markdown-body">
-      <h4>语法 Syntax</h4>
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th>Type</th>
-          <th>Syntax</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>String</td>
-          <td>
-            <code>"name|min-max": "value"</code><br/>
-            <code>"name|count": "value"</code>
-          </td>
-        </tr>
-        <tr>
-          <td>Number</td>
-          <td>
-            <code>"name|+1": 100</code><br/>
-            <code>"name|1-100": 1</code><br/>
-            <code>"name|1-100.1-10": 1</code>
-          </td>
-        </tr>
-        <tr>
-          <td>Boolean</td>
-          <td>
-            <code>"name|1": ture</code><br/>
-            <code>"name|min-max": ture</code>
-          </td>
-        </tr>
-        <tr>
-          <td>Object</td>
-          <td>
-            <code>"name|min-max": {}</code><br/>
-            <code>"name|count": {}</code>
-          </td>
-        </tr>
-        <tr>
-          <td>Array</td>
-          <td>
-            <code>"name|1": [{}, {} ...]</code><br/>
-            <code>"name|min-max": [{}, {} ...]</code><br/>
-            <code>"name|count": [{}, {} ...]</code>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <p>
-        <a href="/#/apis/playground/%252Fmockjs-samples%252Fsyntax" ng-click="hide()">Sample</a>，
-        <a href="http://mockjs.com/#数据模板定义 DTD" target="_blank">文档</a>
-      </p>
-      <h3>占位符 Placeholder</h3>
+      <h2>语法参考</h2>
+
+      <p><a target="_blank" href="http://amoeba.readme.io/v1.0/docs/mockjs">这是什么？</a></p>
+
+      <h3>基本数据类型</h3>
+
+      <div class="highlight highlight-JSON"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>array|2<span class="pl-pds">"</span></span>: [{}],
+  <span class="pl-s1"><span class="pl-pds">"</span>boolean<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@BOOLEAN<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>integer<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@INTEGER(60, 100)<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>float<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@FLOAT(60, 100)<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@STRING(7, 10)<span class="pl-pds">"</span></span>
+}</pre></div>
+
+      <h3>自增 ID</h3>
+
+      <div class="highlight highlight-JSON"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>list|3<span class="pl-pds">"</span></span>: [{
+    <span class="pl-s1"><span class="pl-pds">"</span>id|+1<span class="pl-pds">"</span></span>: <span class="pl-c1">0</span>
+  }]
+}</pre></div>
+
+      <h3>时间</h3>
+
+      <div class="highlight highlight-JSON"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@DATE<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>time<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@TIME<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>now<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@NOW<span class="pl-pds">"</span></span>
+}</pre></div>
+
+      <h3>图片</h3>
+
+      <div class="highlight highlight-JSON"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>image<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@IMAGE('100x200', '#000', 'Hello')<span class="pl-pds">"</span></span>
+}</pre></div>
+
+      <h3>文案</h3>
+
+      <div class="highlight highlight-JSON"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@TITLE<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>word<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@WORD<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>sentence<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@SENTENCE<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>paragraph<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@PARAGRAPH<span class="pl-pds">"</span></span>
+}</pre></div>
+
+      <h3>用户</h3>
+
+      <div class="highlight highlight-JSON"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@NAME<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@ID<span class="pl-pds">"</span></span>
+}</pre></div>
+
+      <p>ID 为身份证号</p>
+
+      <h3>Web</h3>
+
+      <div class="highlight highlight-JSON"><pre>{
+  <span class="pl-s1"><span class="pl-pds">"</span>url<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@URL<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>domain<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@DOMAIN<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>email<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@EMAIL<span class="pl-pds">"</span></span>,
+  <span class="pl-s1"><span class="pl-pds">"</span>ip<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>@IP<span class="pl-pds">"</span></span>
+}</pre></div>
+
+      <h2>完整文档</h2>
       <table class="table table-bordered">
         <thead>
         <tr>
@@ -100,9 +111,6 @@
         </tr>
         </tbody>
       </table>
-      <p>
-        <a href="/#/apis/playground/%252Fmockjs-samples%252Fplaceholder" ng-click="hide()">Sample</a>，
-        <a href="http://mockjs.com/#Mock.Random" target="_blank">文档</a>
       </p>
     </div>
   </md-content>
