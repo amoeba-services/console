@@ -223,11 +223,11 @@ angular.module('ampApp')
       $mdDialog.show({
         targetEvent: $event,
         templateUrl: '/views/mockjsdoc.html',
-        controller: function($scope) {
+        controller: ['$scope', function($scope) {
           $scope.hide = function() {
             $mdDialog.hide(true);
           };
-        },
+        }],
       });
     };
   });
