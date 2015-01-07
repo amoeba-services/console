@@ -85,7 +85,15 @@ angular.module('ampApp')
     };
 
   })
-  .controller('RouteitemInfoCtrl', function($scope) {
+  .controller('RouteitemInfoCtrl', function($scope, $timeout) {
+    $scope.editorOptions = {
+      lineWrapping : true,
+      lineNumbers: true,
+      tabSize: 2,
+      readOnly: true,
+      foldGutter: true,
+      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+    };
     $scope.$watch(
       function() {
         if ($scope.api && $scope.api.route) {
@@ -106,18 +114,13 @@ angular.module('ampApp')
           if (content.type === 'json') {
             content.body = JSONFormat(content.body);
           }
-          $scope.editorOptions.mode = $scope.modes[content.type];
+          $timeout(function() {
+            // 由于未知原因，该 ctrl 首次渲染时这里的 cm 不响应此处的 mode 变化，加延时解决
+            $scope.editorOptions.mode = $scope.modes[content.type];
+          });
         }
       }
     );
-    $scope.editorOptions = {
-      lineWrapping : true,
-      lineNumbers: true,
-      tabSize: 2,
-      readOnly: 'nocursor',
-      foldGutter: true,
-      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-    };
   })
   .controller('RouteitemEditCtrl', function($scope, $timeout, $mdDialog) {
     var defaultHeader = {
@@ -152,17 +155,14 @@ angular.module('ampApp')
       }, 400);
     };
 
-    $scope.mode = 'json';
-
     $scope.editorOptions = {
       lineWrapping : true,
       lineNumbers: true,
       tabSize: 2,
-      mode: $scope.modes[$scope.mode],
       foldGutter: true,
       gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
     };
-    $scope.$watch('mode', function(newValue) {
+    $scope.$watch('item.response.content.type', function(newValue) {
       $scope.editorOptions.mode = $scope.modes[newValue];
     });
 

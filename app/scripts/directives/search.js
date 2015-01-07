@@ -55,14 +55,18 @@ angular.module('ampApp')
           }
           var api = _.extend({}, scope.api);
           timeout = setTimeout(function () {
-            var query = api.path;
+            var path = api.path, query;
             if (scope.api.namespace !== null) {
-              query += ' namespace:' + api.namespace;
+              query = path + ' namespace:' + api.namespace;
             }
             Api.query({
               q: query,
               limit: SUGGEST_MAX_AMOUNT
             }, function(data) {
+              if (path !== scope.api.path) {
+                console.log(path, scope.api.path);
+                return;
+              }
               if (api.namespace === null) {
                 api.mode = 'disabled';
                 data.push(api);
@@ -105,7 +109,13 @@ angular.module('ampApp')
             }
           }
           if(event.keyCode===13) { //enter
-            var url, matchedApi = scope.matchedApis[scope.activeIndex];
+            var url, matchedApi;
+            if (typeof scope.matchedApis === 'undefined' || scope.activeIndex === -1) {
+              matchedApi = scope.api;
+            }
+            else {
+              matchedApi = scope.matchedApis[scope.activeIndex];
+            }
             if (matchedApi) {
               url = scope.getHref(matchedApi);
               $location.url(url);

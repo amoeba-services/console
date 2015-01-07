@@ -56,7 +56,7 @@
             {{routeItem.response.content.status + ' ' + HTTP_STATUS_CODE[routeItem.response.content.status]}}
           </div>
           <div class="info-content-group code">
-            <ui-codemirror  ui-codemirror-opts="editorOptions" ng-model="routeItem.response.content.body"></ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="editorOptions" ng-model="routeItem.response.content.body"></ui-codemirror>
             <span class="info-content-type">{{routeItem.response.content.type}}</span>
           </div>
           <div class="info-content-group" ng-show="routeItem.response.content.headers.length">
@@ -88,7 +88,7 @@
                     ng-options="key as (key+' '+value) group by (key[0]+'XX') for (key, value) in HTTP_STATUS_CODE"></select>
             <select ng-model="item.response.content.type"
                     ng-options="key as key for (key, value) in modes"></select>
-            <md-checkbox ng-model="item.response.inherited" ng-show="false">
+            <md-checkbox ng-model="item.response.inherited" ng-if="false">
               Inherited
             </md-checkbox>
           </div>
