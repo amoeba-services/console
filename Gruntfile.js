@@ -374,9 +374,12 @@ module.exports = function (grunt) {
       },
       bowerAssets: {
         expand: true,
-        cwd: '<%= yeoman.bower %>/material-design-icons',
-        dest: '<%= yeoman.dist %>/<%= yeoman.bower %>/material-design-icons',
-        src: '{,**/}*.svg'
+        cwd: '<%= yeoman.bower %>',
+        dest: '<%= yeoman.dist %>/<%= yeoman.bower %>',
+        src: [
+          'material-design-icons/{,**/}*.svg',
+          'amoeba-vi/dist/*'
+        ]
       }
     },
 

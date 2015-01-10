@@ -3,35 +3,61 @@
   <head>
     <meta charset="utf-8">
     <title ng-bind="$root.title">Amoeba</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-    <link rel="stylesheet" href="bower_components/github-markdown-css/github-markdown.css" />
-    <!-- endbower -->
-    <link rel="stylesheet" type="text/css" href="bower_components/codemirror/lib/codemirror.css">
-    <link rel="stylesheet" type="text/css" href="bower_components/codemirror/addon/fold/foldgutter.css">
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/directives/search.css">
-    <link rel="stylesheet" href="styles/controllers/api.css">
-    <!-- endbuild -->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">-->
   </head>
   <body>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+    <style>
+      html {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        height: 100%;
+      }
+     /*splash*/
+      #splash {
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #4f3985;
+        color: #FFF;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      #splash[ng-cloak] {
+        display: flex;
+      }
+      #splash .loading {
+        background: #fff;
+        width: 16px;
+        height: 16px;
+        margin-top: 50px;
+        border-radius: 8px;
+        -webkit-animation: bounce 2.0s infinite ease-in-out;
+        animation: bounce 2.0s infinite ease-in-out;
+      }
+
+      @-webkit-keyframes bounce {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+      @keyframes bounce {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+    </style>
+    <div id="splash" ng-cloak>
+      <img src="bower_components/amoeba-vi/dist/Amoeba_white.png" width="96" height="96" alt="Amoeba" />
+      <div class="loading"></div>
+    </div>
 
     <!-- Add your site or application content here -->
-
-      <div ng-view="" layout-fill layout="column" id="container"></div>
-
-
+    <div ng-view="" layout-fill layout="column" id="container"></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -76,15 +102,31 @@
     <script src="bower_components/json-format/json-format.js"></script>
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/api.js"></script>
-        <script src="scripts/services/api.js"></script>
-        <script src="scripts/directives/search.js"></script>
-        <script src="scripts/controllers/route.js"></script>
-        <script src="scripts/controllers/routeitem.js"></script>
-        <script src="scripts/directives/loading.js"></script>
-        <!-- endbuild -->
-</body>
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/github-markdown-css/github-markdown.css" />
+    <!-- endbower -->
+    <link rel="stylesheet" type="text/css" href="bower_components/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/codemirror/addon/fold/foldgutter.css">
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/directives/search.css">
+    <link rel="stylesheet" href="styles/controllers/api.css">
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/api.js"></script>
+    <script src="scripts/services/api.js"></script>
+    <script src="scripts/directives/search.js"></script>
+    <script src="scripts/controllers/route.js"></script>
+    <script src="scripts/controllers/routeitem.js"></script>
+    <script src="scripts/directives/loading.js"></script>
+    <!-- endbuild -->
+
+  </body>
 </html>
