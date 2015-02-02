@@ -55,9 +55,9 @@ angular.module('ampApp')
           }
           var api = _.extend({}, scope.api);
           timeout = setTimeout(function () {
-            var path = api.path, query;
+            var path = api.path, query = path;
             if (scope.api.namespace !== null) {
-              query = path + ' namespace:' + api.namespace;
+              query += ' namespace:' + api.namespace;
             }
             Api.query({
               q: query,
