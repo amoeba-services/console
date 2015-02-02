@@ -9,10 +9,10 @@
           <!--ng-blur="updateDescription()"-->
           <!--flex-->
           <!--label="API Description"></md-text-float>-->
-        <md-input-group class="md-default-theme" flex>
+        <md-input-container class="md-default-theme no-error" flex>
           <label>API Description</label>
-          <md-input ng-model="api.description" ng-focus="cacheDescription()" ng-blur="updateDescription(apiDescForm)" name="description" required="true"></md-input>
-        </md-input-group>
+          <input ng-model="api.description" ng-focus="cacheDescription()" ng-blur="updateDescription(apiDescForm)" name="description" required="true" />
+        </md-input-container>
         <div>
           <md-switch ng-model="api.disabled" class="md-warn" aria-label="Disabled" ng-change="saveApi()"></md-switch>
           <md-tooltip>
@@ -49,7 +49,7 @@
     </section>
     <section ng-controller="RouteitemCtrl" flex style="overflow: auto;">
       <div flex layout="column" class="invisible-fence">
-        <md-content ng-controller="RouteitemInfoCtrl" class="route-item-content" flex>
+        <div ng-controller="RouteitemInfoCtrl" class="route-item-content" flex>
           <input type="text" placeholder="Route item description" ng-model="item.description" flex ng-show="false"/>
           <div class="info-content-group">
             <span class="info-key">Status:</span>
@@ -65,7 +65,7 @@
               <span class="info-list-item-key">{{header.key}}:</span>{{header.value}}
             </div>
           </div>
-        </md-content>
+        </div>
       </div>
       <div ng-controller="RouteitemEditCtrl"
            ng-show="editMode==='routeitem'"
@@ -106,9 +106,15 @@
           <!--<md-button ng-hide="showAdvancedContent" ng-click="showAdvancedContent=true">Show Advanced Content</md-button>-->
           <!--<div ng-show="showAdvancedContent">-->
           <div class="info-content-group">
-            <div layout="row" class="input-row-wrapper" ng-repeat="header in item.response.content.headers">
-              <md-text-float label="Header {{$index+1}}" ng-model="header.key"></md-text-float>
-              <md-text-float label="Value {{$index+1}}" ng-model="header.value"></md-text-float>
+            <div layout layout-sm="row" layout-align="center center" ng-repeat="header in item.response.content.headers">
+              <md-input-container flex class="no-error">
+                <label>Header {{$index+1}}</label>
+                <input ng-model="header.key">
+              </md-input-container>
+              <md-input-container flex class="no-error">
+                <label>Value {{$index+1}}</label>
+                <input ng-model="header.value">
+              </md-input-container>
               <md-button ng-click="item.response.content.headers.splice($index, 1)" aria-label="Remove header">
                 <md-icon icon="/bower_components/material-design-icons/content/svg/production/ic_remove_24px.svg"></md-icon>
               </md-button>
@@ -128,7 +134,7 @@
 
     <div class="fab-button-container">
       <div class="fab-button-container-inner invisible-fence">
-        <md-button ng-click="setEditMode('routeitem')" ng-disabled="api.disabled" aria-label="Edit Route item" class="button-edit md-fab">
+        <md-button ng-click="setEditMode('routeitem')" ng-disabled="api.disabled" aria-label="Edit Route item" class="button-edit md-fab md-hue-1">
           <md-icon icon="/bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
         </md-button>
       </div>

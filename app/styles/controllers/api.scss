@@ -25,12 +25,6 @@
       left: 0;
       top: 0;
     }
-    .input-row-wrapper {
-      margin: 2px 0;
-      md-input-group {
-        margin: 0 8px 0 0;
-      }
-    }
     .mockjs-hint {
       text-align: right;
       border-bottom: 1px solid #eee;
@@ -125,7 +119,7 @@
 }
 
 .create-api-dialog {
-  width: 50%;
+  min-width: 50%;
   .namespace {
     margin-right: 10px;
   }

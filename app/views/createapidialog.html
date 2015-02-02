@@ -1,5 +1,5 @@
 <md-dialog aria-label="Create API" class="create-api-dialog">
-  <form novalidate name="createApiForm">
+  <form name="createApiForm">
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h3>Create API</h3>
@@ -13,17 +13,21 @@
           ng-options="namespace for namespace in namespaces"
           class="namespace">
         </select>
-        <md-text-float label="Path" name="path" ng-model="api.path" required="true" flex></md-text-float>
+        <md-input-container flex>
+          <label>Path</label>
+          <input name="path" ng-model="api.path" required />
+          <div ng-messages="createApiForm.path.$error">
+            <div ng-message="required">Path required.</div>
+          </div>
+        </md-input-container>
       </div>
-      <div class="input-error-hint" ng-show="createApiForm.$submitted || createApiForm.path.$touched">
-        <div ng-show="createApiForm.path.$error.required">Path required.</div>
-      </div>
-      <div layout="row">
-        <md-text-float label="Description" name="description" ng-model="api.description" required="true" flex></md-text-float>
-      </div>
-      <div class="input-error-hint" ng-show="createApiForm.$submitted || createApiForm.description.$touched">
-        <div ng-show="createApiForm.description.$error.required">Description required.</div>
-      </div>
+      <md-input-container>
+        <label>Description</label>
+        <input name="description" ng-model="api.description" required />
+        <div ng-messages="createApiForm.description.$error">
+          <div ng-message="required">Description required.</div>
+        </div>
+      </md-input-container>
     </md-content>
     <div class="md-actions" layout="row">
       <md-button type="submit" ng-click="submit(createApiForm)" aria-label="Create">

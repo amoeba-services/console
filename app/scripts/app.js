@@ -15,6 +15,7 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
+    'ngMessages',
     'ngMaterial',
     'ui.tree',
     'ui.codemirror'
@@ -22,8 +23,8 @@ angular
   .config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
 
-      .primaryColor('light-green')
-      //.accentColor('light-blue')
+      .primaryPalette('light-green')
+      .accentPalette('deep-purple')
       //.warnColor('pink')
       ;
     $mdThemingProvider.alwaysWatchTheme(true);
