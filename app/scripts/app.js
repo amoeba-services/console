@@ -23,7 +23,7 @@ angular
   .config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
 
-      .primaryPalette('light-green')
+      .primaryPalette('green')
       .accentPalette('deep-purple')
       //.warnColor('pink')
       ;

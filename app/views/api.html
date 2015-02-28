@@ -75,19 +75,25 @@
         <md-toolbar>
           <div class="md-toolbar-tools">
             <md-button ng-click="save()" aria-label="Save">
-              <md-icon icon="/bower_components/material-design-icons/action/svg/production/ic_done_24px.svg"></md-icon>
+              <md-icon md-svg-src="/bower_components/material-design-icons/action/svg/production/ic_done_24px.svg"></md-icon>
             </md-button>
             <md-button ng-click="cancel()" aria-label="Cancel">
-              <md-icon icon="/bower_components/material-design-icons/navigation/svg/production/ic_close_24px.svg"></md-icon>
+              <md-icon md-svg-src="/bower_components/material-design-icons/navigation/svg/production/ic_close_24px.svg"></md-icon>
             </md-button>
           </div>
         </md-toolbar>
         <md-content flex>
           <div class="info-content-group">
-            <select ng-model="item.response.content.status"
-                    ng-options="key as (key+' '+value) group by (key[0]+'XX') for (key, value) in HTTP_STATUS_CODE"></select>
-            <select ng-model="item.response.content.type"
-                    ng-options="key as key for (key, value) in modes"></select>
+            <md-select ng-model="item.response.content.status">
+              <md-select-label>{{item.response.content.status + ' ' + HTTP_STATUS_CODE[item.response.content.status]}}</md-select-label>
+              <md-option ng-value="key" ng-repeat="(key, value) in HTTP_STATUS_CODE">{{ key+' '+value }}</md-option>
+            </md-select>
+            <!--<select ng-model="item.response.content.status"-->
+                    <!--ng-options="key as (key+' '+value) group by (key[0]+'XX') for (key, value) in HTTP_STATUS_CODE"></select>-->
+            <md-select ng-model="item.response.content.type">
+              <md-select-label>{{item.response.content.type}}</md-select-label>
+              <md-option ng-value="key" ng-repeat="(key, value) in modes">{{ key }}</md-option>
+            </md-select>
             <md-checkbox ng-model="item.response.inherited" ng-if="false">
               Inherited
             </md-checkbox>
@@ -116,11 +122,11 @@
                 <input ng-model="header.value">
               </md-input-container>
               <md-button ng-click="item.response.content.headers.splice($index, 1)" aria-label="Remove header">
-                <md-icon icon="/bower_components/material-design-icons/content/svg/production/ic_remove_24px.svg"></md-icon>
+                <md-icon md-svg-src="/bower_components/material-design-icons/content/svg/production/ic_remove_24px.svg"></md-icon>
               </md-button>
             </div>
             <md-button ng-click="item.response.content.headers.push({key:'',value:''})" aria-label="Add header">
-              <md-icon icon="/bower_components/material-design-icons/content/svg/production/ic_add_24px.svg"></md-icon>
+              <md-icon md-svg-src="/bower_components/material-design-icons/content/svg/production/ic_add_24px.svg"></md-icon>
             </md-button>
           </div>
           <!--</div>-->
@@ -134,8 +140,8 @@
 
     <div class="fab-button-container">
       <div class="fab-button-container-inner invisible-fence">
-        <md-button ng-click="setEditMode('routeitem')" ng-disabled="api.disabled" aria-label="Edit Route item" class="button-edit md-fab md-hue-1">
-          <md-icon icon="/bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
+        <md-button ng-click="setEditMode('routeitem')" ng-disabled="api.disabled" aria-label="Edit Route item" class="button-edit md-fab">
+          <md-icon md-svg-src="/bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
         </md-button>
       </div>
     </div>

@@ -2,10 +2,10 @@
   <div class="search-bar md-whiteframe-z1">
     <div class="invisible-fence" layout="row" layout-align="start center">
       <md-button ng-hide="active" class="btn-home" aria-label="Home">
-        <md-icon icon="/bower_components/material-design-icons/action/svg/production/ic_home_24px.svg"></md-icon>
+        <md-icon md-svg-src="/bower_components/material-design-icons/action/svg/production/ic_home_24px.svg"></md-icon>
       </md-button>
       <md-button ng-show="active" ng-click="deactivate()" aria-label="Back to API">
-        <md-icon icon="/bower_components/material-design-icons/navigation/svg/production/ic_arrow_back_24px.svg"></md-icon>
+        <md-icon md-svg-src="/bower_components/material-design-icons/navigation/svg/production/ic_arrow_back_24px.svg"></md-icon>
       </md-button>
       <select ng-model="api.namespace"
               ng-options="namespace for namespace in namespaces"

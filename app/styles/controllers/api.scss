@@ -98,6 +98,10 @@
       position: absolute;
       bottom: 16px;
       right: 12px;
+      color: #FFF;
+      &[disabled] {
+        color: #ccc;
+      }
     }
   }
 

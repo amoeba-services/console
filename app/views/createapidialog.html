@@ -6,13 +6,12 @@
       </div>
     </md-toolbar>
     <md-content>
-      <div layout="row" layout-align="center center">
-        <select
-          name="namespace"
-          ng-model="api.namespace"
-          ng-options="namespace for namespace in namespaces"
-          class="namespace">
-        </select>
+      <div layout="row" layout-align="center start">
+        <md-select ng-model="api.namespace">
+          <!-- trick https://github.com/angular/material/issues/1699#issuecomment-76292388 -->
+          <md-select-label>{{ api.namespace }}</md-select-label>
+          <md-option ng-value="namespace" ng-repeat="namespace in namespaces">{{ namespace }}</md-option>
+        </md-select>
         <md-input-container flex>
           <label>Path</label>
           <input name="path" ng-model="api.path" required />
@@ -31,10 +30,10 @@
     </md-content>
     <div class="md-actions" layout="row">
       <md-button type="submit" ng-click="submit(createApiForm)" aria-label="Create">
-        <md-icon icon="/bower_components/material-design-icons/action/svg/production/ic_done_24px.svg"></md-icon>
+        <md-icon md-svg-src="/bower_components/material-design-icons/action/svg/production/ic_done_24px.svg"></md-icon>
       </md-button>
       <md-button ng-click="cancel()" aria-label="Cancel">
-        <md-icon icon="/bower_components/material-design-icons/navigation/svg/production/ic_close_24px.svg"></md-icon>
+        <md-icon md-svg-src="/bower_components/material-design-icons/navigation/svg/production/ic_close_24px.svg"></md-icon>
       </md-button>
     </div>
   </form>
